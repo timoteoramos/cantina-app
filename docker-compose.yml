@@ -1,0 +1,29 @@
+services:
+  app:
+    image: "docker.io/timoteoramos/cantina-app:latest"
+    build:
+      context: "."
+      target: "production"
+    env_file:
+      - ".env"
+      - "docker.env"
+    ports:
+      - mode: "host"
+        protocol: "tcp"
+        published: 8001
+        target: 8000
+  postgresql:
+    image: "docker.io/postgres:17"
+    env_file:
+      - ".env"
+      - "docker.env"
+    volumes:
+      - "postgresql_data:/var/lib/postgresql/data"
+    ports:
+      - mode: "host"
+        protocol: "tcp"
+        published: 5432
+        target: 5432
+
+volumes:
+  postgresql_data:
