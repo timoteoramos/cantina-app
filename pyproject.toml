@@ -11,7 +11,8 @@ python = ">=3.12,<4.0"
 django-environ = "^0.11.2"
 django-model-utils = "^5.0.0"
 uvicorn = "^0.34.0"
-psycopg = {extras = ["binary"], version = "^3.2.3"}
+psycopg = { extras = ["binary"], version = "^3.2.3" }
+whitenoise = {extras = ["brotli"], version = "^6.8.2"}
 
 [tool.poetry.group.dev.dependencies]
 autopep8 = "^2.3.1"
@@ -19,6 +20,7 @@ pylint-django = "^2.6.1"
 
 [tool.poetry.scripts]
 dev = "cantina.scripts:devserver"
+django = "cantina.manage:main"
 
 [build-system]
 requires = ["poetry-core"]
