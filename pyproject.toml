@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "cantina"
+version = "0.1.0"
+description = "Sistema de gestão para cantinas"
+authors = ["Timóteo Ramos <timoteoramos@ymail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.12,<4.0"
+django-model-utils = "^5.0.0"
+uvicorn = "^0.34.0"
+
+[tool.poetry.group.dev.dependencies]
+autopep8 = "^2.3.1"
+pylint-django = "^2.6.1"
+
+[tool.poetry.scripts]
+dev = "cantina.scripts:devserver"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
