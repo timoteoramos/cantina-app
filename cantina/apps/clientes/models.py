@@ -11,7 +11,7 @@ from model_utils.models import (
 class Responsavel(SoftDeletableModel, TimeStampedModel):
     nome = models.CharField(max_length=64)
     telefone = PhoneNumberField()
-    cpf = BRCPFField()
+    cpf = BRCPFField(verbose_name="CPF")
 
     def __str__(self) -> str:
         return f"{self.nome}"
@@ -28,7 +28,7 @@ class Aluno(SoftDeletableModel, TimeStampedModel):
 
     nome = models.CharField(max_length=64)
     telefone = PhoneNumberField(blank=True, null=True)
-    cpf = BRCPFField(blank=True, null=True)
+    cpf = BRCPFField(verbose_name="CPF", blank=True, null=True)
 
     def __str__(self) -> str:
         return f"{self.nome}"

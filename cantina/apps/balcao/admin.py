@@ -7,4 +7,7 @@ from .models import (
 
 @admin.register(Produto)
 class ProdutoAdmin(admin.ModelAdmin):
-    pass
+    fields = (
+        "nome",
+        "valor",
+    )

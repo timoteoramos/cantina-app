@@ -1,5 +1,10 @@
 from django.contrib import admin
 
+from .forms import (
+    AlunoForm,
+    ResponsavelForm,
+)
+
 from .models import (
     Aluno,
     Responsavel,
@@ -8,9 +13,9 @@ from .models import (
 
 @admin.register(Aluno)
 class AlunoAdmin(admin.ModelAdmin):
-    pass
+    form = AlunoForm
 
 
 @admin.register(Responsavel)
 class ResponsavelAdmin(admin.ModelAdmin):
-    pass
+    form = ResponsavelForm

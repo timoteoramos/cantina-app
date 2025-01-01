@@ -38,7 +38,7 @@ class Venda(SoftDeletableModel, TimeStampedModel):
     )
 
     def __str__(self) -> str:
-        return f"{self.aluno.nome}"
+        return f"{self.aluno.nome} - R$ {self.total_venda}"
 
 
 class VendaProduto(SoftDeletableModel, TimeStampedModel):
@@ -57,7 +57,7 @@ class VendaProduto(SoftDeletableModel, TimeStampedModel):
     quantidade = models.SmallIntegerField(default=1)
 
     def __str__(self) -> str:
-        return f"{self.venda.aluno.nome} - {self.produto.nome}"
+        return f"{self.quantidade}x {self.produto.nome} - R$ {self.valor}"
 
     @property
     def valor_total(self) -> Decimal:
@@ -81,3 +81,6 @@ class Lancamento(SoftDeletableModel, TimeStampedModel):
 
     tipo = models.SmallIntegerField(default=0, choices=PAGAMENTO_CHOICES)
     valor = models.DecimalField(max_digits=8, decimal_places=2)
+
+    def __str__(self) -> str:
+        return f"{PAGAMENTO_CHOICES[self.tipo]} - R$ {self.valor}"
