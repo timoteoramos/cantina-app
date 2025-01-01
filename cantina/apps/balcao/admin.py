@@ -11,3 +11,12 @@ class ProdutoAdmin(admin.ModelAdmin):
         "nome",
         "valor",
     )
+
+    list_display = [
+        "nome",
+        "valor",
+    ]
+
+    search_fields = [
+        "nome",
+    ]
