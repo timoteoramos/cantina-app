@@ -1,4 +1,6 @@
 from django.db import models
+from localflavor.br.models import BRCPFField
+from phonenumber_field.modelfields import PhoneNumberField
 
 from model_utils.models import (
     SoftDeletableModel,
@@ -8,6 +10,8 @@ from model_utils.models import (
 
 class Responsavel(SoftDeletableModel, TimeStampedModel):
     nome = models.CharField(max_length=64)
+    telefone = PhoneNumberField()
+    cpf = BRCPFField()
 
     def __str__(self) -> str:
         return f"{self.nome}"
@@ -21,7 +25,10 @@ class Aluno(SoftDeletableModel, TimeStampedModel):
     responsavel = models.ForeignKey(
         Responsavel, verbose_name="responsável", on_delete=models.DO_NOTHING
     )
+
     nome = models.CharField(max_length=64)
+    telefone = PhoneNumberField(blank=True, null=True)
+    cpf = BRCPFField(blank=True, null=True)
 
     def __str__(self) -> str:
         return f"{self.nome}"

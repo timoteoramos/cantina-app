@@ -2,11 +2,9 @@ from django.db import models
 from decimal import Decimal
 from cantina.apps.balcao.models import Produto
 from cantina.apps.clientes.models import Aluno
-from model_utils import Choices
 
 from model_utils.models import (
     SoftDeletableModel,
-    StatusModel,
     TimeStampedModel,
 )
 
@@ -18,14 +16,26 @@ PAGAMENTO_CHOICES = {
 }
 
 
-class Venda(SoftDeletableModel, StatusModel, TimeStampedModel):
-    STATUS = Choices("pendente", "pago")
+class Venda(SoftDeletableModel, TimeStampedModel):
     aluno = models.ForeignKey(
         Aluno,
         on_delete=models.DO_NOTHING,
     )
 
+    pago = models.BooleanField(default=False)
     produtos = models.ManyToManyField(Produto, through="VendaProduto")
+
+    total_venda = models.DecimalField(
+        max_digits=8,
+        decimal_places=2,
+        default=Decimal(0),
+    )
+
+    total_pago = models.DecimalField(
+        max_digits=8,
+        decimal_places=2,
+        default=Decimal(0),
+    )
 
     def __str__(self) -> str:
         return f"{self.aluno.nome}"
@@ -43,7 +53,7 @@ class VendaProduto(SoftDeletableModel, TimeStampedModel):
         on_delete=models.DO_NOTHING,
     )
 
-    valor = models.DecimalField(max_digits=8, decimal_places=2)
+    valor = models.DecimalField(max_digits=8, decimal_places=2, default=0)
     quantidade = models.SmallIntegerField(default=1)
 
     def __str__(self) -> str:
